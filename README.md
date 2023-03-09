@@ -9,6 +9,8 @@ We use the [ShapeNet](https://www.shapenet.org/), [Pix3D](http://pix3d.csail.mit
 - ShapeNet rendering images: http://cvgl.stanford.edu/data2/ShapeNetRendering.tgz
 - ShapeNet voxelized models: http://cvgl.stanford.edu/data2/ShapeNetVox32.tgz
 - Pix3D images & voxelized models: http://pix3d.csail.mit.edu/data/pix3d.zip
+- Statue Model dataset: https://lgg.epfl.ch/statues_dataset.php
+- BlendedMVS dataset: https://github.com/YoYo000/BlendedMVS
 
 ## Pretrained Models
 
