@@ -30,7 +30,7 @@ class SemGraphConv(nn.Module):
     def forward(self, input):
         h0 = torch.matmul(input, self.W[0])
         h1 = torch.matmul(input, self.W[1])
-        adj =self.adj.to(input.device)# F.softmax(adj, dim=1)
+        adj =self.adj.to(input.device)
         M = torch.eye(adj.size(0), dtype=torch.float).to(input.device)
         output = torch.matmul(adj * M, h0) + torch.matmul(adj * (1 - M), h1)
 

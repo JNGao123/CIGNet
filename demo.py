@@ -68,7 +68,6 @@ def test_net(rendering_images,
 
 
 
-    # Switch models to evaluation mode
     encoder_ied.eval()
     decoder_ied.eval()
     encoder_ced.eval()
@@ -79,11 +78,10 @@ def test_net(rendering_images,
 
 
     with torch.no_grad():
-        # Get data from data loader
+
         rendering_images = utils.network_utils.var_or_cuda(rendering_images)
         ground_truth_volume = utils.network_utils.var_or_cuda(ground_truth_volume)
 
-        #get local and global feature
         image_features = encoder_ied(rendering_images)
         raw_features, generated_volume = decoder_ied(image_features)
 
@@ -102,7 +100,6 @@ def test_net(rendering_images,
             generated_volume = torch.mean(generated_volume, dim=1)
 
 
-        # IoU per sample
         sample_iou = []
         for th in cfg.TEST.VOXEL_THRESH:
             _volume = torch.ge(generated_volume, th).float()
@@ -141,11 +138,10 @@ def get_args_from_command_line():
 
 def main():
 
-    # Print config
     print('Use config:')
     pprint(cfg)
 
-    # Set GPU to use
+
     if type(cfg.CONST.DEVICE) == str:
         os.environ["CUDA_VISIBLE_DEVICES"] = cfg.CONST.DEVICE
 
@@ -154,9 +150,9 @@ def main():
 
 if __name__ == '__main__':
     import cv2
-    img_path = "/home/gaojunna/paper2020GJN-TheSecondIdear/paper_1_git/CIGNet/testdata/fff199c067a6e0f019fb4103277a6b93/rendering/"
+    img_path = "/testdata/fff199c067a6e0f019fb4103277a6b93/rendering/"
     img_names = ["01.png","02.png"]
-    vox_path = "/home/gaojunna/paper2020GJN-TheSecondIdear/paper_1_git/CIGNet/testdata/fff199c067a6e0f019fb4103277a6b93/"
+    vox_path = "/testdata/fff199c067a6e0f019fb4103277a6b93/"
     vox_name = "model.binvox"
     rendering_images = [cv2.imread(img_path+im, cv2.IMREAD_UNCHANGED).astype(np.float32) / 255. for im in img_names]
 

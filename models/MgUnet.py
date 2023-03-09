@@ -20,16 +20,13 @@ class _GCN_conv3d_common(torch.nn.Module):
 
         else:
             _gconv_input = [ nn.Sequential(_GraphConv(adj1, self.inputdim , self.outputdim, p_dropout=p_dropout))]
-         #   _gconv_input.append(_GraphNonLocal(1024))
 
         self.gconv_channel1 = nn.Sequential(*_gconv_input)
 
         if (islastlayer):
             _gconv_input1 = [SemGraphConv(inputdim, outputdim, adj2)]
         else:
-
             _gconv_input1 = [ nn.Sequential(_GraphConv(adj2, self.inputdim , self.outputdim, p_dropout=p_dropout))]
-        ##    _gconv_input1.append(_GraphNonLocal(1024))
 
         self.gconv_channel2 = nn.Sequential(*_gconv_input1)
 
@@ -37,7 +34,6 @@ class _GCN_conv3d_common(torch.nn.Module):
             _gconv_input2 = [SemGraphConv(inputdim, outputdim, adj2)]
         else:
             _gconv_input2 = [ nn.Sequential(_GraphConv(adj2, self.inputdim , self.outputdim, p_dropout=p_dropout))]
-         ##   _gconv_input2.append(_GraphNonLocal(1024))
 
         self.gconv_channel3 = nn.Sequential(*_gconv_input2)
 
@@ -62,7 +58,7 @@ class _GCN_conv3d_common(torch.nn.Module):
                     continue;
             if(i==len(idx)-1):
                 break
-       # coarse_volumes1 = coarse_volumes1.permute(1, 0, 2, 3, 4).contiguous()
+
         coarse_volumes1_merge = list(torch.split(coarse_volumes1, 1,  dim=1))
         coarse_volumes1_merge_random = []
         for i in range(len(idx)):
@@ -77,7 +73,7 @@ class _GCN_conv3d_common(torch.nn.Module):
             coarse_volumes1temp = coarse_volumes1temp.view((-1,2, self.scale,  self.scale,  self.scale))
             coarse_volumes1temp = torch.mean(coarse_volumes1temp, dim=1)
             merge1.append(coarse_volumes1temp)
-        merge1   =  torch.stack(merge1,dim=1)#.permute(1, 0, 2, 3, 4).contiguous()
+        merge1   =  torch.stack(merge1,dim=1)
 
 
         coarse_volumes2_merge = list(torch.split(coarse_volumes2, 1,  dim=1))
@@ -94,7 +90,7 @@ class _GCN_conv3d_common(torch.nn.Module):
             coarse_volumes2temp = coarse_volumes2temp.view((-1,2, self.scale,  self.scale,  self.scale))
             coarse_volumes2temp = torch.mean(coarse_volumes2temp, dim=1)
             merge2.append(coarse_volumes2temp)
-        merge2  =  torch.stack(merge2,dim=1)#.permute(1, 0, 2, 3, 4).contiguous()
+        merge2  =  torch.stack(merge2,dim=1)
 
         coarse_volumes3_merge = list(torch.split(coarse_volumes3, 1,  dim=1))
         coarse_volumes3_merge_random = []
@@ -110,7 +106,7 @@ class _GCN_conv3d_common(torch.nn.Module):
             coarse_volumes3temp = coarse_volumes3temp.view((-1,2, self.scale,  self.scale,  self.scale))
             coarse_volumes3temp = torch.mean(coarse_volumes3temp, dim=1)
             merge3.append(coarse_volumes3temp)
-        merge3   =  torch.stack(merge3,dim=1)#.permute(1, 0, 2, 3, 4).contiguous()
+        merge3   =  torch.stack(merge3,dim=1)
 
 
         coarse_volumes1 = merge1.permute(0, 1, 3, 4, 2).contiguous()
@@ -144,7 +140,6 @@ class _convDownSamping(torch.nn.Module):
 
     def forward(self, coarse_volumes):
         coarse_volumes = coarse_volumes.view((-1, self.cfg.CONST.N_VIEWS_RENDERING,self.scale , self.scale , self.scale ))
-        # image_features = torch.add(image_features, lanten)
         image_features = coarse_volumes.permute(1, 0, 2, 3, 4).contiguous()
         image_features = torch.split(image_features, 1, dim=0)
 
@@ -152,7 +147,6 @@ class _convDownSamping(torch.nn.Module):
 
         for features in image_features:
             volumes = features.view((-1, 1, self.scale , self.scale , self.scale ))
-            # print(volumes_32_l.size())       # torch.Size([batch_size, 1, 32, 32, 32])
             volumes = self.layer1(volumes)
             volumes = self.layer2(volumes)
 
@@ -184,7 +178,6 @@ class _convUpSamping(torch.nn.Module):
 
     def forward(self, coarse_volumes):
         coarse_volumes = coarse_volumes.view((-1, self.cfg.CONST.N_VIEWS_RENDERING, self.scale , self.scale , self.scale ))
-        # image_features = torch.add(image_features, lanten)
         image_features = coarse_volumes.permute(1, 0, 2, 3, 4).contiguous()
         image_features = torch.split(image_features, 1, dim=0)
 
@@ -192,7 +185,6 @@ class _convUpSamping(torch.nn.Module):
 
         for features in image_features:
             volumes = features.view((-1, 1, self.scale , self.scale , self.scale ))
-            # print(volumes_32_l.size())       # torch.Size([batch_size, 1, 32, 32, 32])
             volumes = self.layer1(volumes)
             volumes = self.layer2(volumes)
 

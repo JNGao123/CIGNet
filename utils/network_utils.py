@@ -8,7 +8,6 @@ from datetime import datetime as dt
 
 def label1(label):
     size = len(label)
-    #labels = np.zeros((size,13),dtype = 'float32')
     labelList = []
 
     for i in range(size):

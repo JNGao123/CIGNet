@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-#
-# References:
-# - https://github.com/xiumingzhang/GenRe-ShapeHD
 
 import cv2
 # import matplotlib.pyplot as plt
@@ -149,21 +146,6 @@ class CenterCrop(object):
                 processed_image = cv2.resize(img[y_top:y_bottom, x_left:x_right], (self.img_size_w, self.img_size_h))
 
             processed_images = np.append(processed_images, [processed_image], axis=0)
-            # Debug
-            # fig = plt.figure()
-            # ax1 = fig.add_subplot(1, 2, 1)
-            # ax1.imshow(img)
-            # if not bounding_box is None:
-            #     rect = patches.Rectangle((bounding_box[0], bounding_box[1]),
-            #                              bbox_width,
-            #                              bbox_height,
-            #                              linewidth=1,
-            #                              edgecolor='r',
-            #                              facecolor='none')
-            #     ax1.add_patch(rect)
-            # ax2 = fig.add_subplot(1, 2, 2)
-            # ax2.imshow(processed_image)
-            # plt.show()
         return processed_images
 
 
@@ -291,13 +273,6 @@ class ColorJitter(object):
                 processed_image = self._adjust_image_attr(processed_image, attr_names[idx], attr_values[idx])
 
             processed_images = np.append(processed_images, [processed_image], axis=0)
-            # print('ColorJitter', np.mean(ori_img), np.mean(processed_image))
-            # fig = plt.figure(figsize=(8, 4))
-            # ax1 = fig.add_subplot(1, 2, 1)
-            # ax1.imshow(ori_img)
-            # ax2 = fig.add_subplot(1, 2, 2)
-            # ax2.imshow(processed_image)
-            # plt.show()
         return processed_images
 
     def _adjust_image_attr(self, img, attr_name, attr_value):
@@ -399,16 +374,7 @@ class RandomNoise(object):
 
             processed_image = processed_image[:, :, ::-1]    # RGB -> BGR
             processed_images = np.append(processed_images, [processed_image], axis=0)
-            # from copy import deepcopy
-            # ori_img = deepcopy(img)
-            # print(noise_rgb, np.mean(processed_image), np.mean(ori_img))
-            # print('RandomNoise', np.mean(ori_img), np.mean(processed_image))
-            # fig = plt.figure(figsize=(8, 4))
-            # ax1 = fig.add_subplot(1, 2, 1)
-            # ax1.imshow(ori_img)
-            # ax2 = fig.add_subplot(1, 2, 2)
-            # ax2.imshow(processed_image)
-            # plt.show()
+
         return processed_images
 
 

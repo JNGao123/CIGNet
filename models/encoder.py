@@ -33,21 +33,19 @@ class Encoder(torch.nn.Module):
             param.requires_grad = False
 
     def forward(self, rendering_images):
-        # print(rendering_images.size())  # torch.Size([batch_size, n_views, img_c, img_h, img_w])
         rendering_images = rendering_images.permute(1, 0, 2, 3, 4).contiguous()
         rendering_images = torch.split(rendering_images, 1, dim=0)
         image_features = []
 
         for img in rendering_images:
             features = self.vgg(img.squeeze(dim=0))
-            # print(features.size())    # torch.Size([batch_size, 512, 28, 28])
 
             features = self.layer1(features)
-            # print(features.size())    # torch.Size([batch_size, 512, 26, 26])
+
             features = self.layer2(features)
-            # print(features.size())    # torch.Size([batch_size, 512, 24, 24])
+
             features = self.layer3(features)
-            # print(features.size())    # torch.Size([batch_size, 256, 8, 8])
+
 
             image_features.append(features)
 

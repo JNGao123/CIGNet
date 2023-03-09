@@ -33,8 +33,6 @@ def adj_mx_from_edges(num_pts, edges, sparse=True):
     j = np.append(jj, ii)
 
     adj_mx = sp.coo_matrix((data, (i, j)), shape=(num_pts, num_pts), dtype=np.float32)
-   # a =  np.array(adj_mx.todense())
-    # build symmetric adjacency matrix
     adj_mx = adj_mx + adj_mx.T.multiply(adj_mx.T > adj_mx) - adj_mx.multiply(adj_mx.T > adj_mx)
     adj_mx = normalize(adj_mx + 1.1*sp.eye(adj_mx.shape[0]))
 
@@ -64,9 +62,8 @@ def gatScaleAdj(cfg):
     return [adj_mx_from_skeleton16(cfg),adj_mx_from_skeleton16_nosys(cfg),adj_mx_from_skeleton8(cfg),adj_mx_from_skeleton8_nosys(cfg),adj_mx_from_skeleton4(cfg),adj_mx_from_skeleton4_nosys(cfg)]
 
 
-################################16
 
-#     return adj_mx_from_edges(num_joints, edges, sparse=False)
+
 def adj_mx_from_skeleton16(cfg,num_joints = 64):
     num_joints  = 2 * 16
 
@@ -133,9 +130,9 @@ def getadj16_nosys(cfg,numtemp = 16):
     return edgesFin
 
 
-################################8
 
-#     return adj_mx_from_edges(num_joints, edges, sparse=False)
+
+
 def adj_mx_from_skeleton8(cfg,num_joints = 64):
     num_joints  = 2 * 8
 
@@ -199,17 +196,6 @@ def getadj8_nosys(cfg,numtemp = 8):
 
 
 
-
-
-
-
-
-
-####################################8
-
-################################44444
-
-#     return adj_mx_from_edges(num_joints, edges, sparse=False)
 def adj_mx_from_skeleton4(cfg,num_joints = 64):
     num_joints  = 2 * 4
 
@@ -270,18 +256,6 @@ def getadj4_nosys(cfg,numtemp = 4):
                 edgesFin.append(idx)
 
     return edgesFin
-
-
-
-
-
-
-
-
-
-####################################8
-
-
 
 
 

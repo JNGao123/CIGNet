@@ -20,12 +20,11 @@ class DecoderCED(torch.nn.Module):
         )
 
         self.layerT11 = torch.nn.Sequential(
-            torch.nn.Linear(1024, 13),
-            #torch.nn.Softmax()
+            torch.nn.Linear(1024, 13)
         )
 
 
-        # Layer Definition
+
         self.layer1 = torch.nn.Sequential(
             torch.nn.ConvTranspose3d(2048, 512, kernel_size=4, stride=2, bias=cfg.NETWORK.TCONV_USE_BIAS, padding=1),
             torch.nn.BatchNorm3d(512),
@@ -68,20 +67,13 @@ class DecoderCED(torch.nn.Module):
 
             classFeature.append(featuresclass11)
             gen_volume = features.view(-1, 2048, 2, 2, 2)
-            # print(gen_volume.size())   # torch.Size([batch_size, 2048, 2, 2, 2])
             gen_volume = self.layer1(gen_volume)
-            # print(gen_volume.size())   # torch.Size([batch_size, 512, 4, 4, 4])
             gen_volume = self.layer2(gen_volume)
-            # print(gen_volume.size())   # torch.Size([batch_size, 128, 8, 8, 8])
             gen_volume = self.layer3(gen_volume)
-            # print(gen_volume.size())   # torch.Size([batch_size, 32, 16, 16, 16])
             gen_volume = self.layer4(gen_volume)
             raw_feature = gen_volume
-            # print(gen_volume.size())   # torch.Size([batch_size, 8, 32, 32, 32])
             gen_volume = self.layer5(gen_volume)
-            # print(gen_volume.size())   # torch.Size([batch_size, 1, 32, 32, 32])
             raw_feature = torch.cat((raw_feature, gen_volume), dim=1)
-            # print(raw_feature.size())  # torch.Size([batch_size, 9, 32, 32, 32])
             gen_volumes.append(torch.squeeze(gen_volume, dim=1))
             raw_features.append(raw_feature)
 
