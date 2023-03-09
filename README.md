@@ -14,6 +14,5 @@ We use the [ShapeNet](https://www.shapenet.org/), [Pix3D](http://pix3d.csail.mit
 
 The pretrained models on ShapeNet are available as follows:
 
-- [CIGNet](https://pan.baidu.com/s/1TRjZymnOzjA-NNPT5s_IAQ) 
-- [Pix2Vox++/A](https://gateway.infinitescript.com/?fileName=Pix2Vox%2B%2B-A-ShapeNet.pth) (提取码：ffc0)
+- [CIGNet](https://pan.baidu.com/s/1TRjZymnOzjA-NNPT5s_IAQ) (PIN：ffc0)
 
