@@ -10,17 +10,10 @@ We use the [ShapeNet](https://www.shapenet.org/), [Pix3D](http://pix3d.csail.mit
 - ShapeNet voxelized models: http://cvgl.stanford.edu/data2/ShapeNetVox32.tgz
 - Pix3D images & voxelized models: http://pix3d.csail.mit.edu/data/pix3d.zip
 
-## Prerequisites
+## Pretrained Models
 
-#### Clone the Code Repository
+The pretrained models on ShapeNet are available as follows:
 
-```
-git clone https://gitlab.com/JNGao123/CIGNet.git
-```
+- [CIGNet](https://pan.baidu.com/s/1TRjZymnOzjA-NNPT5s_IAQ) 
+- [Pix2Vox++/A](https://gateway.infinitescript.com/?fileName=Pix2Vox%2B%2B-A-ShapeNet.pth) (提取码：ffc0)
 
-#### Install Python Denpendencies
-
-```
-cd CIGNet
-pip install -r requirements.txt
-```
