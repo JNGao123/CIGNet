@@ -22,3 +22,18 @@ The pretrained models on ShapeNet are available as follows:
 
 - [CIGNet](https://pan.baidu.com/s/1TRjZymnOzjA-NNPT5s_IAQ) (PIN：ffc0)
 
+## Prerequisites
+
+#### Clone the Code Repository
+
+```
+git clone https://gitlab.com/JNGao/CIGNet.git
+```
+
+#### Install Python Denpendencies
+
+```
+cd CIGNet
+pip install -r requirements.txt
+```
+
