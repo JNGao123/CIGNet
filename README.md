@@ -27,7 +27,7 @@ The pretrained models on ShapeNet are available as follows:
 #### Clone the Code Repository
 
 ```
-git clone https://gitlab.com/JNGao/CIGNet.git
+git clone https://github.com/JNGao/CIGNet.git
 ```
 
 #### Install Python Denpendencies
