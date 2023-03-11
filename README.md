@@ -37,8 +37,5 @@ cd CIGNet
 pip install -r requirements.txt
 ```
 
-## Acknowledgement
-The implement of this project is based on the code of [Pix2Vox](https://arxiv.org/abs/2006.12250).
-
 ## Contact
 Please drop me an email for any problems or discussion: jngao@emails.bjut.edu.cn
