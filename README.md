@@ -36,6 +36,3 @@ git clone https://github.com/JNGao/CIGNet.git
 cd CIGNet
 pip install -r requirements.txt
 ```
-
-## Contact
-Please drop me an email for any problems or discussion: jngao@emails.bjut.edu.cn
