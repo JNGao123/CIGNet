@@ -116,7 +116,7 @@ def test_net(rendering_images,
 
 
 def get_args_from_command_line():
-    parser = ArgumentParser(description='Parser of Runner of Pix2Vox')
+    parser = ArgumentParser(description='Parser of Runner of CIGNet')
     parser.add_argument('--gpu',
                         dest='gpu_id',
                         help='GPU device id to use [cuda0]',
